@@ -3,82 +3,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:background="@color/background">
 
-    <!-- Status bar: lives + score -->
+    <!-- Top bar: Menu | Lives | Score -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/surface"
-        android:padding="12dp"
-        android:layout_marginBottom="40dp"
-        android:elevation="2dp">
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:elevation="4dp">
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu"
+            android:textSize="13sp"
+            android:padding="8dp"
+            android:backgroundTint="@color/secondary" />
 
         <TextView
             android:id="@+id/tv_lives"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textColor="@color/lives_color"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/tv_score"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textColor="@color/primary"
             android:textStyle="bold"
-            android:gravity="end" />
+            android:minWidth="90dp"
+            android:gravity="end"
+            android:paddingEnd="8dp" />
 
     </LinearLayout>
 
-    <!-- Operation display -->
-    <TextView
-        android:id="@+id/tv_operation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="56sp"
-        android:textColor="@color/text_primary"
-        android:textStyle="bold"
-        android:layout_marginBottom="48dp" />
+    <!-- Operation + answer display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <!-- Answer input -->
-    <EditText
-        android:id="@+id/et_answer"
+        <TextView
+            android:id="@+id/tv_operation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="52sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="28dp" />
+
+        <TextView
+            android:id="@+id/tv_display"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="?"
+            android:textSize="42sp"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@color/surface"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <!-- Custom numeric keypad -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/your_answer"
-        android:inputType="numberSigned"
-        android:textSize="28sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
         android:background="@color/surface"
-        android:padding="12dp" />
+        android:padding="6dp">
 
-    <!-- Validate button -->
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/validate"
-        android:textSize="20sp"
-        android:padding="16dp"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/primary" />
+        <!-- Row: 7 8 9 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_7" style="@style/KeypadDigit" android:text="7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_8" style="@style/KeypadDigit" android:text="8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_9" style="@style/KeypadDigit" android:text="9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+        </LinearLayout>
 
-    <!-- Back to menu -->
-    <Button
-        android:id="@+id/btn_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu"
-        android:textSize="15sp"
-        android:backgroundTint="@color/secondary" />
+        <!-- Row: 4 5 6 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_4" style="@style/KeypadDigit" android:text="4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_5" style="@style/KeypadDigit" android:text="5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_6" style="@style/KeypadDigit" android:text="6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+        </LinearLayout>
+
+        <!-- Row: 1 2 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_1" style="@style/KeypadDigit" android:text="1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_2" style="@style/KeypadDigit" android:text="2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_3" style="@style/KeypadDigit" android:text="3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+        </LinearLayout>
+
+        <!-- Row: ⌫ 0 OK -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_delete" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" android:text="⌫" android:textSize="22sp" android:padding="18dp" android:backgroundTint="#E65100" android:textColor="#FFFFFF" />
+            <Button android:id="@+id/btn_0"      style="@style/KeypadDigit" android:text="0" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" />
+            <Button android:id="@+id/btn_validate" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="4dp" android:text="OK" android:textSize="22sp" android:padding="18dp" android:backgroundTint="@color/correct_green" android:textColor="#FFFFFF" android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

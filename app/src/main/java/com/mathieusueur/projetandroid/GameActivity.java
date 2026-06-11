@@ -18,11 +18,12 @@ public class GameActivity extends AppCompatActivity {
     private TextView tvOperation;
     private TextView tvLives;
     private TextView tvScore;
-    private EditText etAnswer;
+    private TextView tvDisplay;
 
     private int lives = MAX_LIVES;
     private int score = 0;
     private int correctAnswer;
+    private final StringBuilder currentInput = new StringBuilder();
     private DatabaseHelper dbHelper;
 
     @Override
@@ -33,23 +34,47 @@ public class GameActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         tvOperation = findViewById(R.id.tv_operation);
-        tvLives = findViewById(R.id.tv_lives);
-        tvScore = findViewById(R.id.tv_score);
-        etAnswer = findViewById(R.id.et_answer);
+        tvLives     = findViewById(R.id.tv_lives);
+        tvScore     = findViewById(R.id.tv_score);
+        tvDisplay   = findViewById(R.id.tv_display);
 
-        Button btnSubmit = findViewById(R.id.btn_submit);
-        Button btnMenu = findViewById(R.id.btn_menu);
+        // Menu button → ends the current game (save score flow)
+        findViewById(R.id.btn_menu).setOnClickListener(v -> showGameOverDialog());
 
-        btnSubmit.setOnClickListener(v -> checkAnswer());
-        btnMenu.setOnClickListener(v -> finish());
+        // Digit buttons
+        int[] digitIds = {
+            R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3,
+            R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7,
+            R.id.btn_8, R.id.btn_9
+        };
+        for (int i = 0; i < digitIds.length; i++) {
+            final String digit = String.valueOf(i);
+            findViewById(digitIds[i]).setOnClickListener(v -> appendDigit(digit));
+        }
 
-        etAnswer.setOnEditorActionListener((v, actionId, event) -> {
-            checkAnswer();
-            return true;
-        });
+        findViewById(R.id.btn_delete).setOnClickListener(v -> deleteLastDigit());
+        findViewById(R.id.btn_validate).setOnClickListener(v -> checkAnswer());
 
         generateOperation();
         updateStatusBar();
+    }
+
+    private void appendDigit(String digit) {
+        if (currentInput.length() < 5) {
+            currentInput.append(digit);
+            refreshDisplay();
+        }
+    }
+
+    private void deleteLastDigit() {
+        if (currentInput.length() > 0) {
+            currentInput.deleteCharAt(currentInput.length() - 1);
+            refreshDisplay();
+        }
+    }
+
+    private void refreshDisplay() {
+        tvDisplay.setText(currentInput.length() == 0 ? "?" : currentInput.toString());
     }
 
     private void generateOperation() {
@@ -68,64 +93,56 @@ public class GameActivity extends AppCompatActivity {
                 a = random.nextInt(MAX_NUMBER) + 1;
                 b = random.nextInt(a) + 1;
                 correctAnswer = a - b;
-                symbol = "-";
+                symbol = "−";
                 break;
-            case 2: // Multiplication (smaller numbers to keep it manageable)
+            case 2: // Multiplication
                 a = random.nextInt(10) + 1;
                 b = random.nextInt(10) + 1;
                 correctAnswer = a * b;
                 symbol = "×";
                 break;
-            default: // Division — build from quotient to guarantee integer result
-                b = random.nextInt(9) + 2;           // divisor 2–10
-                correctAnswer = random.nextInt(10) + 1; // quotient 1–10
+            default: // Division — guaranteed integer result
+                b = random.nextInt(9) + 2;
+                correctAnswer = random.nextInt(10) + 1;
                 a = b * correctAnswer;
                 symbol = "÷";
                 break;
         }
 
         tvOperation.setText(a + " " + symbol + " " + b + " = ?");
+        currentInput.setLength(0);
+        refreshDisplay();
     }
 
     private void checkAnswer() {
-        String input = etAnswer.getText().toString().trim();
-
-        if (input.isEmpty()) {
-            Toast.makeText(this, getString(R.string.enter_answer), Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (currentInput.length() == 0) return;
 
         int userAnswer;
         try {
-            userAnswer = Integer.parseInt(input);
+            userAnswer = Integer.parseInt(currentInput.toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show();
             return;
         }
-
-        etAnswer.setText("");
 
         if (userAnswer == correctAnswer) {
             score++;
             Toast.makeText(this, getString(R.string.correct), Toast.LENGTH_SHORT).show();
+            generateOperation();
+            updateStatusBar();
         } else {
             lives--;
-            Toast.makeText(this,
-                    getString(R.string.wrong) + correctAnswer,
-                    Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, getString(R.string.wrong) + correctAnswer, Toast.LENGTH_SHORT).show();
             if (lives <= 0) {
                 showGameOverDialog();
-                return;
+            } else {
+                generateOperation();
+                updateStatusBar();
             }
         }
-
-        generateOperation();
-        updateStatusBar();
     }
 
     private void updateStatusBar() {
-        tvLives.setText(getString(R.string.lives) + " " + buildHearts(lives));
+        tvLives.setText(buildHearts(lives));
         tvScore.setText(getString(R.string.score) + " " + score);
     }
 
@@ -151,14 +168,10 @@ public class GameActivity extends AppCompatActivity {
                     String name = nameInput.getText().toString().trim();
                     if (name.isEmpty()) name = getString(R.string.anonymous);
                     dbHelper.insertScore(name, score);
-                    goToHighscores();
+                    startActivity(new Intent(this, HighscoreActivity.class));
+                    finish();
                 })
                 .setNegativeButton(getString(R.string.skip), (dialog, which) -> finish())
                 .show();
-    }
-
-    private void goToHighscores() {
-        startActivity(new Intent(this, HighscoreActivity.class));
-        finish();
     }
 }
