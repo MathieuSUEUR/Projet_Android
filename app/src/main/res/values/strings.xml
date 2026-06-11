@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MathQuiz</string>
+    <string name="subtitle">Mental Math Challenge</string>
+
+    <!-- Main menu -->
+    <string name="play">Play</string>
+    <string name="highscores">Highscores</string>
+
+    <!-- Game screen -->
+    <string name="lives">Lives:</string>
+    <string name="score">Score:</string>
+    <string name="your_answer">Your answer…</string>
+    <string name="validate">Validate</string>
+    <string name="menu">Menu</string>
+    <string name="correct">Correct!</string>
+    <string name="wrong">Wrong! Answer was: </string>
+    <string name="enter_answer">Please enter an answer</string>
+    <string name="invalid_number">Invalid number</string>
+
+    <!-- Game over -->
+    <string name="game_over">Game Over</string>
+    <string name="game_over_message">Your final score: </string>
+    <string name="enter_name">Enter your name</string>
+    <string name="save">Save</string>
+    <string name="skip">Skip</string>
+    <string name="anonymous">Anonymous</string>
+
+    <!-- Highscore screen -->
+    <string name="top_scores">Top 10 Scores</string>
+    <string name="back">Back</string>
+    <string name="no_scores">No scores yet. Play to set a record!</string>
+    <string name="rank_format">%1$d. %2$s — %3$d pts</string>
+</resources>
