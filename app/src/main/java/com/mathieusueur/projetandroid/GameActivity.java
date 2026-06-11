@@ -2,10 +2,10 @@ package com.mathieusueur.projetandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
@@ -19,6 +19,8 @@ public class GameActivity extends AppCompatActivity {
     private TextView tvLives;
     private TextView tvScore;
     private TextView tvDisplay;
+    private TextView tvFeedback;
+    private Runnable hideFeedback;
 
     private int lives = MAX_LIVES;
     private int score = 0;
@@ -37,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
         tvLives     = findViewById(R.id.tv_lives);
         tvScore     = findViewById(R.id.tv_score);
         tvDisplay   = findViewById(R.id.tv_display);
+        tvFeedback  = findViewById(R.id.tv_feedback);
 
         // Menu button → ends the current game (save score flow)
         findViewById(R.id.btn_menu).setOnClickListener(v -> showGameOverDialog());
@@ -126,12 +129,12 @@ public class GameActivity extends AppCompatActivity {
 
         if (userAnswer == correctAnswer) {
             score++;
-            Toast.makeText(this, getString(R.string.correct), Toast.LENGTH_SHORT).show();
+            showFeedback(true);
             generateOperation();
             updateStatusBar();
         } else {
             lives--;
-            Toast.makeText(this, getString(R.string.wrong) + correctAnswer, Toast.LENGTH_SHORT).show();
+            showFeedback(false);
             if (lives <= 0) {
                 showGameOverDialog();
             } else {
@@ -139,6 +142,22 @@ public class GameActivity extends AppCompatActivity {
                 updateStatusBar();
             }
         }
+    }
+
+    private void showFeedback(boolean correct) {
+        if (hideFeedback != null) tvFeedback.removeCallbacks(hideFeedback);
+        tvFeedback.setBackgroundResource(correct
+                ? R.drawable.bg_feedback_correct
+                : R.drawable.bg_feedback_wrong);
+        tvFeedback.setText(correct ? "✓" : "✗");
+        tvFeedback.setAlpha(0f);
+        tvFeedback.setVisibility(View.VISIBLE);
+        tvFeedback.animate().alpha(1f).setDuration(150).setStartDelay(0).start();
+        hideFeedback = () -> tvFeedback.animate()
+                .alpha(0f).setDuration(300)
+                .withEndAction(() -> tvFeedback.setVisibility(View.GONE))
+                .start();
+        tvFeedback.postDelayed(hideFeedback, 750);
     }
 
     private void updateStatusBar() {
