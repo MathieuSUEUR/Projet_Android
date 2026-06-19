@@ -58,35 +58,44 @@
 
     </LinearLayout>
 
-    <!-- Calcul à résoudre -->
-    <TextView
-        android:id="@+id/texte_question"
+    <!-- Zone centrale extensible : prend toute la place entre la barre du
+         haut et le clavier, en centrant le calcul et la réponse -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:textColor="@color/bleu"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <!-- Affichage de la réponse saisie (aucun clavier système) -->
-    <TextView
-        android:id="@+id/texte_reponse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/fond_reponse"
-        android:gravity="center"
-        android:minHeight="52dp"
-        android:padding="8dp"
-        android:textColor="@color/bleu"
-        android:textSize="30sp" />
+        <!-- Calcul à résoudre -->
+        <TextView
+            android:id="@+id/texte_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/bleu"
+            android:textSize="44sp"
+            android:textStyle="bold" />
 
-    <!-- Clavier numérique personnalisé (chiffres 0 à 9) -->
+        <!-- Barre où s'écrit la réponse (aucun clavier système) -->
+        <TextView
+            android:id="@+id/texte_reponse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/fond_reponse"
+            android:gravity="center"
+            android:minHeight="56dp"
+            android:padding="8dp"
+            android:textColor="@color/bleu"
+            android:textSize="32sp" />
+
+    </LinearLayout>
+
+    <!-- Clavier numérique personnalisé, placé en bas de l'écran -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:orientation="vertical"
         tools:ignore="HardcodedText">
 
@@ -99,32 +108,32 @@
             <Button
                 android:id="@+id/btn1"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="1"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn2"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="2"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn3"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="3"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <!-- Ligne 4 5 6 -->
@@ -136,32 +145,32 @@
             <Button
                 android:id="@+id/btn4"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="4"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn5"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="5"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn6"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="6"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <!-- Ligne 7 8 9 -->
@@ -173,32 +182,32 @@
             <Button
                 android:id="@+id/btn7"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="7"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn8"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="8"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn9"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="9"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <!-- Ligne effacer / 0 / valider -->
@@ -210,32 +219,32 @@
             <Button
                 android:id="@+id/btn_effacer"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#9E9E9E"
                 android:text="@string/effacer"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn0"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/bleu"
                 android:text="0"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn_ok"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#43A047"
                 android:text="@string/ok"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>

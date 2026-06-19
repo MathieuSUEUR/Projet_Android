@@ -2,7 +2,9 @@ package com.example.quizmaths;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +25,7 @@ public class JeuActivity extends AppCompatActivity {
     private int vies = 3;
     private int score = 0;
     private int bonneReponse;     // résultat attendu de la question en cours
-    private int pointsQuestion;   // points gagnés si la réponse est bonne (1 ou 5)
+    private int pointsQuestion;   // points gagnés si la réponse est bonne (1 ou 2)
     private String saisie = "";   // chiffres tapés par le joueur
 
     private ImageView coeur1, coeur2, coeur3;
@@ -198,6 +200,11 @@ public class JeuActivity extends AppCompatActivity {
         // Sinon (points gagnés OU erreurs commises) on enregistre le score
         final EditText champNom = new EditText(this);
         champNom.setHint(R.string.votre_nom);
+        // On désactive les suggestions et l'autofill du système pour la saisie du pseudo
+        champNom.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            champNom.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        }
 
         new AlertDialog.Builder(this)
                 .setTitle(R.string.partie_terminee)
