@@ -2,6 +2,7 @@
     <string name="app_name">QuizMaths</string>
     <string name="titre_app">QuizMaths</string>
     <string name="jouer">Play</string>
+    <string name="chronometrer">Timed</string>
     <string name="meilleurs_scores">High scores</string>
     <!-- Game screen -->
     <string name="valider">Validate</string>

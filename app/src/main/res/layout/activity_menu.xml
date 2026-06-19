@@ -16,7 +16,7 @@
         android:textSize="32sp"
         android:textStyle="bold" />
 
-    <!-- Bouton pour lancer une partie -->
+    <!-- Bouton pour lancer une partie normale -->
     <Button
         android:id="@+id/bouton_jouer"
         android:layout_width="200dp"
@@ -24,6 +24,15 @@
         android:layout_margin="12dp"
         android:backgroundTint="@color/bleu"
         android:text="@string/jouer" />
+
+    <!-- Bouton pour lancer une partie chronométrée -->
+    <Button
+        android:id="@+id/bouton_chrono"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/bleu"
+        android:text="@string/chronometrer" />
 
     <!-- Bouton pour voir les meilleurs scores -->
     <Button

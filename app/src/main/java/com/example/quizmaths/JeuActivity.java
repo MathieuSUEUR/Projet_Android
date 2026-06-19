@@ -4,11 +4,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 // Écran de jeu : on pose des calculs au joueur.
-// Le joueur a 3 vies (cœurs) et gagne 10 points par bonne réponse.
+// Le joueur a 3 vies (cœurs) et gagne 1 ou 2 points par bonne réponse.
 // La réponse est tapée avec un clavier de chiffres affiché dans l'application.
+// En mode chronométré, chaque calcul doit être répondu en 10 secondes.
 public class JeuActivity extends AppCompatActivity {
 
     private int vies = 3;
@@ -28,10 +31,15 @@ public class JeuActivity extends AppCompatActivity {
     private int pointsQuestion;   // points gagnés si la réponse est bonne (1 ou 2)
     private String saisie = "";   // chiffres tapés par le joueur
 
+    private boolean chrono;       // true si le mode chronométré est activé
+    private CountDownTimer minuteur;
+    private static final long TEMPS_PAR_CALCUL = 10000; // 10 secondes par calcul
+
     private ImageView coeur1, coeur2, coeur3;
     private TextView texteScore;
     private TextView texteQuestion;
     private TextView texteReponse;
+    private ProgressBar barreTemps;
 
     private final Random random = new Random();
 
@@ -46,6 +54,13 @@ public class JeuActivity extends AppCompatActivity {
         texteScore = findViewById(R.id.texte_score);
         texteQuestion = findViewById(R.id.texte_question);
         texteReponse = findViewById(R.id.texte_reponse);
+        barreTemps = findViewById(R.id.barre_temps);
+
+        // Mode chronométré : activé si on arrive depuis le bouton "Chronométré"
+        chrono = getIntent().getBooleanExtra("chrono", false);
+        if (chrono) {
+            barreTemps.setVisibility(View.VISIBLE);
+        }
 
         // Bouton "Quitter" : arrête la partie
         findViewById(R.id.bouton_quitter).setOnClickListener(new View.OnClickListener() {
@@ -133,6 +148,11 @@ public class JeuActivity extends AppCompatActivity {
         // On remet à zéro la réponse en cours
         saisie = "";
         texteReponse.setText("");
+
+        // En mode chronométré, on relance le compte à rebours
+        if (chrono) {
+            demarrerMinuteur();
+        }
     }
 
     // Met à jour l'affichage du score
@@ -145,6 +165,39 @@ public class JeuActivity extends AppCompatActivity {
         coeur1.setVisibility(vies >= 1 ? View.VISIBLE : View.INVISIBLE);
         coeur2.setVisibility(vies >= 2 ? View.VISIBLE : View.INVISIBLE);
         coeur3.setVisibility(vies >= 3 ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    // (Mode chronométré) Démarre le compte à rebours pour le calcul en cours
+    private void demarrerMinuteur() {
+        if (minuteur != null) {
+            minuteur.cancel();
+        }
+        barreTemps.setProgress(100);
+        minuteur = new CountDownTimer(TEMPS_PAR_CALCUL, 50) {
+            @Override
+            public void onTick(long tempsRestant) {
+                // La barre se vide de 100 % à 0 % au fil du temps
+                barreTemps.setProgress((int) (tempsRestant * 100 / TEMPS_PAR_CALCUL));
+            }
+
+            @Override
+            public void onFinish() {
+                barreTemps.setProgress(0);
+                tempsEcoule();
+            }
+        };
+        minuteur.start();
+    }
+
+    // (Mode chronométré) Le temps est écoulé : le joueur perd une vie
+    private void tempsEcoule() {
+        vies--;
+        majVies();
+        if (vies <= 0) {
+            finDePartie();
+        } else {
+            nouvelleQuestion();
+        }
     }
 
     // Ajoute un chiffre à la réponse en cours
@@ -170,9 +223,14 @@ public class JeuActivity extends AppCompatActivity {
             return;
         }
 
+        // Le joueur a répondu : on arrête le chronomètre s'il tourne
+        if (chrono && minuteur != null) {
+            minuteur.cancel();
+        }
+
         int reponse = Integer.parseInt(saisie);
         if (reponse == bonneReponse) {
-            // +1 pour addition/soustraction, +5 pour multiplication/division
+            // +1 pour addition/soustraction, +2 pour multiplication/division
             score += pointsQuestion;
             majScore();
         } else {
@@ -191,6 +249,11 @@ public class JeuActivity extends AppCompatActivity {
     // Fin de partie : on enregistre le score sauf si le joueur quitte
     // sans avoir rien fait (aucun point gagné ET aucune vie perdue).
     private void finDePartie() {
+        // On arrête le chronomètre s'il tourne encore
+        if (minuteur != null) {
+            minuteur.cancel();
+        }
+
         if (score == 0 && vies == 3) {
             // Rien joué : on ne met rien dans le classement, retour au menu
             finish();
@@ -228,5 +291,14 @@ public class JeuActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // On libère le chronomètre quand on quitte l'écran
+        if (minuteur != null) {
+            minuteur.cancel();
+        }
     }
 }
