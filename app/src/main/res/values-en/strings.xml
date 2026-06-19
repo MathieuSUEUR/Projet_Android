@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">QuizMaths</string>
+    <string name="titre_app">QuizMaths</string>
+    <string name="jouer">Play</string>
+    <string name="meilleurs_scores">High scores</string>
+    <!-- Game screen -->
+    <string name="valider">Validate</string>
+    <string name="votre_reponse">Your answer</string>
+    <string name="score_vies">Score: %1$d   Lives: %2$d</string>
+    <string name="bonne_reponse">Correct answer!</string>
+    <string name="mauvaise_reponse">Wrong answer</string>
+    <string name="entrez_reponse">Enter an answer</string>
+    <string name="partie_terminee">Game over</string>
+    <string name="score_final">Your final score: %1$d</string>
+    <string name="votre_nom">Your name</string>
+    <!-- High scores screen -->
+    <string name="titre_scores">High scores</string>
+    <string name="retour">Back</string>
+    <string name="aucun_score">No score yet</string>
+</resources>
