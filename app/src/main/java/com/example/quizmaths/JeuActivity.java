@@ -23,6 +23,7 @@ public class JeuActivity extends AppCompatActivity {
     private int vies = 3;
     private int score = 0;
     private int bonneReponse;     // résultat attendu de la question en cours
+    private int pointsQuestion;   // points gagnés si la réponse est bonne (1 ou 5)
     private String saisie = "";   // chiffres tapés par le joueur
 
     private ImageView coeur1, coeur2, coeur3;
@@ -96,29 +97,33 @@ public class JeuActivity extends AppCompatActivity {
         String signe;
 
         switch (operateur) {
-            case 0: // addition
+            case 0: // addition (rapporte 1 point)
                 a = random.nextInt(50) + 1;
                 b = random.nextInt(50) + 1;
                 bonneReponse = a + b;
                 signe = "+";
+                pointsQuestion = 1;
                 break;
-            case 1: // soustraction (a >= b pour éviter les nombres négatifs)
+            case 1: // soustraction (a >= b pour éviter les négatifs ; 1 point)
                 a = random.nextInt(50) + 1;
                 b = random.nextInt(a) + 1;
                 bonneReponse = a - b;
                 signe = "-";
+                pointsQuestion = 1;
                 break;
-            case 2: // multiplication
+            case 2: // multiplication (rapporte 5 points)
                 a = random.nextInt(10) + 1;
                 b = random.nextInt(10) + 1;
                 bonneReponse = a * b;
                 signe = "×";
+                pointsQuestion = 5;
                 break;
-            default: // division entière : on construit a pour que a % b == 0
+            default: // division entière : a % b == 0 (rapporte 5 points)
                 b = random.nextInt(9) + 1;            // diviseur entre 1 et 9
                 bonneReponse = random.nextInt(9) + 1; // quotient entre 1 et 9
                 a = b * bonneReponse;                 // ainsi a / b est entier
                 signe = "÷";
+                pointsQuestion = 5;
                 break;
         }
 
@@ -165,13 +170,12 @@ public class JeuActivity extends AppCompatActivity {
 
         int reponse = Integer.parseInt(saisie);
         if (reponse == bonneReponse) {
-            score += 10;
+            // +1 pour addition/soustraction, +5 pour multiplication/division
+            score += pointsQuestion;
             majScore();
-            Toast.makeText(this, R.string.bonne_reponse, Toast.LENGTH_SHORT).show();
         } else {
             vies--;
             majVies();
-            Toast.makeText(this, R.string.mauvaise_reponse, Toast.LENGTH_SHORT).show();
         }
 
         // Plus de vies : la partie est terminée
@@ -182,39 +186,40 @@ public class JeuActivity extends AppCompatActivity {
         }
     }
 
-    // Fin de partie : on enregistre le score seulement s'il est supérieur à 0
+    // Fin de partie : on enregistre le score sauf si le joueur quitte
+    // sans avoir rien fait (aucun point gagné ET aucune vie perdue).
     private void finDePartie() {
-        if (score > 0) {
-            // Score positif : on demande le nom et on enregistre dans le classement
-            final EditText champNom = new EditText(this);
-            champNom.setHint(R.string.votre_nom);
-
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.partie_terminee)
-                    .setMessage(getString(R.string.score_final, score))
-                    .setView(champNom)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.valider, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String nom = champNom.getText().toString().trim();
-                            if (nom.isEmpty()) {
-                                nom = "Anonyme";
-                            }
-                            // Enregistrement du score dans la base SQLite
-                            DatabaseHelper db = new DatabaseHelper(JeuActivity.this);
-                            db.ajouterScore(nom, score);
-
-                            // On affiche l'écran des meilleurs scores
-                            startActivity(new Intent(JeuActivity.this, HighscoreActivity.class));
-                            finish();
-                        }
-                    })
-                    .show();
-        } else {
-            // Score nul : on n'enregistre pas et on revient au menu
-            Toast.makeText(this, R.string.score_nul, Toast.LENGTH_SHORT).show();
+        if (score == 0 && vies == 3) {
+            // Rien joué : on ne met rien dans le classement, retour au menu
             finish();
+            return;
         }
+
+        // Sinon (points gagnés OU erreurs commises) on enregistre le score
+        final EditText champNom = new EditText(this);
+        champNom.setHint(R.string.votre_nom);
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.partie_terminee)
+                .setMessage(getString(R.string.score_final, score))
+                .setView(champNom)
+                .setCancelable(false)
+                .setPositiveButton(R.string.valider, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String nom = champNom.getText().toString().trim();
+                        if (nom.isEmpty()) {
+                            nom = "Anonyme";
+                        }
+                        // Enregistrement du score dans la base SQLite
+                        DatabaseHelper db = new DatabaseHelper(JeuActivity.this);
+                        db.ajouterScore(nom, score);
+
+                        // On affiche l'écran des meilleurs scores
+                        startActivity(new Intent(JeuActivity.this, HighscoreActivity.class));
+                        finish();
+                    }
+                })
+                .show();
     }
 }

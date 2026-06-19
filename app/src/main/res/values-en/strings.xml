@@ -5,10 +5,6 @@
     <string name="meilleurs_scores">High scores</string>
     <!-- Game screen -->
     <string name="valider">Validate</string>
-    <string name="votre_reponse">Your answer</string>
-    <string name="score_vies">Score: %1$d   Lives: %2$d</string>
-    <string name="bonne_reponse">Correct answer!</string>
-    <string name="mauvaise_reponse">Wrong answer</string>
     <string name="entrez_reponse">Enter an answer</string>
     <string name="partie_terminee">Game over</string>
     <string name="score_final">Your final score: %1$d</string>
@@ -17,7 +13,6 @@
     <string name="ok">OK</string>
     <string name="effacer">⌫</string>
     <string name="score_actuel">Score: %1$d</string>
-    <string name="score_nul">Zero score: not saved</string>
     <string name="vies">Lives</string>
     <!-- High scores screen -->
     <string name="titre_scores">High scores</string>
