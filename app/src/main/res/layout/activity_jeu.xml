@@ -58,8 +58,7 @@
 
     </LinearLayout>
 
-    <!-- Zone centrale extensible : prend toute la place entre la barre du
-         haut et le clavier, en centrant le calcul et la réponse -->
+    <!-- Zone centrale extensible : le calcul occupe et est centré dans le haut -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -77,20 +76,20 @@
             android:textSize="44sp"
             android:textStyle="bold" />
 
-        <!-- Barre où s'écrit la réponse (aucun clavier système) -->
-        <TextView
-            android:id="@+id/texte_reponse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/fond_reponse"
-            android:gravity="center"
-            android:minHeight="56dp"
-            android:padding="8dp"
-            android:textColor="@color/bleu"
-            android:textSize="32sp" />
-
     </LinearLayout>
+
+    <!-- Barre où s'écrit la réponse, collée juste au-dessus du clavier -->
+    <TextView
+        android:id="@+id/texte_reponse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fond_reponse"
+        android:gravity="center"
+        android:minHeight="56dp"
+        android:padding="8dp"
+        android:textColor="@color/bleu"
+        android:textSize="32sp" />
 
     <!-- Clavier numérique personnalisé, placé en bas de l'écran -->
     <LinearLayout
