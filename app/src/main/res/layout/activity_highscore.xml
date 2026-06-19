@@ -16,6 +16,32 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
+    <!-- Sélecteur de mode : Classique ou Chronométré -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bouton_classique"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bleu"
+            android:text="@string/classique" />
+
+        <Button
+            android:id="@+id/bouton_chrono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bleu"
+            android:text="@string/chronometrer" />
+
+    </LinearLayout>
+
     <!-- Liste des meilleurs scores -->
     <ListView
         android:id="@+id/liste_scores"

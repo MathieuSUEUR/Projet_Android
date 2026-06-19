@@ -281,12 +281,15 @@ public class JeuActivity extends AppCompatActivity {
                         if (nom.isEmpty()) {
                             nom = "Anonyme";
                         }
-                        // Enregistrement du score dans la base SQLite
+                        // Enregistrement du score dans la base SQLite, avec le mode joué
+                        String mode = chrono ? DatabaseHelper.MODE_CHRONO : DatabaseHelper.MODE_CLASSIQUE;
                         DatabaseHelper db = new DatabaseHelper(JeuActivity.this);
-                        db.ajouterScore(nom, score);
+                        db.ajouterScore(nom, score, mode);
 
-                        // On affiche l'écran des meilleurs scores
-                        startActivity(new Intent(JeuActivity.this, HighscoreActivity.class));
+                        // On affiche l'écran des meilleurs scores, sur le mode joué
+                        Intent intent = new Intent(JeuActivity.this, HighscoreActivity.class);
+                        intent.putExtra("mode", mode);
+                        startActivity(intent);
                         finish();
                     }
                 })

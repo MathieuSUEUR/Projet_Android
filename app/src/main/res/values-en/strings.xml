@@ -17,6 +17,7 @@
     <string name="vies">Lives</string>
     <!-- High scores screen -->
     <string name="titre_scores">High scores</string>
+    <string name="classique">Classic</string>
     <string name="retour">Back</string>
     <string name="aucun_score">No score yet</string>
 </resources>

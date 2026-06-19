@@ -17,6 +17,7 @@
     <string name="vies">Vies</string>
     <!-- Écran des meilleurs scores -->
     <string name="titre_scores">Meilleurs scores</string>
+    <string name="classique">Classique</string>
     <string name="retour">Retour</string>
     <string name="aucun_score">Aucun score pour le moment</string>
 </resources>
