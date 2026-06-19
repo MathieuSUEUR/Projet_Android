@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Thème principal de l'application -->
+    <style name="Theme.QuizMaths" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/bleu</item>
+        <item name="colorPrimaryVariant">@color/bleu</item>
+        <item name="colorOnPrimary">@color/blanc</item>
+    </style>
+</resources>

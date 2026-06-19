@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <!-- Titre de l'application -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:text="@string/titre_app"
+        android:textColor="@color/bleu"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <!-- Bouton pour lancer une partie -->
+    <Button
+        android:id="@+id/bouton_jouer"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/bleu"
+        android:text="@string/jouer" />
+
+    <!-- Bouton pour voir les meilleurs scores -->
+    <Button
+        android:id="@+id/bouton_scores"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/bleu"
+        android:text="@string/meilleurs_scores" />
+
+</LinearLayout>

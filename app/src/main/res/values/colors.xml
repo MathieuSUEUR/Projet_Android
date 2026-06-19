@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Couleur principale de l'application -->
+    <color name="bleu">#1A73E8</color>
+    <color name="blanc">#FFFFFF</color>
+    <!-- Couleur de fond de l'icône de l'application -->
+    <color name="ic_launcher_background">#1A73E8</color>
+</resources>

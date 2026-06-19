@@ -1,0 +1,5 @@
+// Fichier build.gradle au niveau du projet
+// On déclare le plugin Android sans l'appliquer ici (apply false)
+plugins {
+    id 'com.android.application' version '8.2.0' apply false
+}
