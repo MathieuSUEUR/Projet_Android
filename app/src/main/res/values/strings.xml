@@ -3,4 +3,8 @@
     <string name="titre_app">QuizMaths</string>
     <string name="jouer">Jouer</string>
     <string name="meilleurs_scores">Meilleurs scores</string>
+    <!-- Écran des meilleurs scores -->
+    <string name="titre_scores">Meilleurs scores</string>
+    <string name="retour">Retour</string>
+    <string name="aucun_score">Aucun score pour le moment</string>
 </resources>

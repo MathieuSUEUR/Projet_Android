@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Écran des meilleurs scores -->
+        <activity
+            android:name=".HighscoreActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

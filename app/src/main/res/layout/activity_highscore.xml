@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp">
+
+    <!-- Titre de l'écran -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:text="@string/titre_scores"
+        android:textColor="@color/bleu"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <!-- Liste des meilleurs scores -->
+    <ListView
+        android:id="@+id/liste_scores"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="12dp" />
+
+    <!-- Bouton de retour au menu -->
+    <Button
+        android:id="@+id/bouton_retour"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/bleu"
+        android:text="@string/retour" />
+
+</LinearLayout>
