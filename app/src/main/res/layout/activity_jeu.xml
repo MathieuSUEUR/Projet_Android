@@ -58,32 +58,28 @@
 
     </LinearLayout>
 
-    <!-- Zone centrale extensible : le calcul occupe et est centré dans le haut -->
-    <LinearLayout
+    <!-- Espace flexible au-dessus pour centrer le bloc dans l'écran -->
+    <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_weight="1" />
 
-        <!-- Calcul à résoudre -->
-        <TextView
-            android:id="@+id/texte_question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/bleu"
-            android:textSize="44sp"
-            android:textStyle="bold" />
+    <!-- Calcul à résoudre -->
+    <TextView
+        android:id="@+id/texte_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/bleu"
+        android:textSize="44sp"
+        android:textStyle="bold" />
 
-    </LinearLayout>
-
-    <!-- Barre où s'écrit la réponse, collée juste au-dessus du clavier -->
+    <!-- Barre où s'écrit la réponse -->
     <TextView
         android:id="@+id/texte_reponse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/fond_reponse"
         android:gravity="center"
         android:minHeight="56dp"
@@ -91,10 +87,11 @@
         android:textColor="@color/bleu"
         android:textSize="32sp" />
 
-    <!-- Clavier numérique personnalisé, placé en bas de l'écran -->
+    <!-- Clavier numérique personnalisé -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         tools:ignore="HardcodedText">
 
@@ -247,5 +244,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- Espace flexible en dessous pour centrer le bloc dans l'écran -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
