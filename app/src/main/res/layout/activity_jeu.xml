@@ -1,48 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:padding="16dp">
 
-    <!-- Affichage du score et des vies -->
-    <TextView
-        android:id="@+id/texte_infos"
-        android:layout_width="wrap_content"
+    <!-- Barre du haut : vies (cœurs), score et bouton quitter -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:textColor="@color/bleu"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <!-- Question (le calcul à résoudre) -->
+        <ImageView
+            android:id="@+id/coeur1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/vies"
+            android:src="@drawable/coeur" />
+
+        <ImageView
+            android:id="@+id/coeur2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/vies"
+            android:src="@drawable/coeur" />
+
+        <ImageView
+            android:id="@+id/coeur3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/vies"
+            android:src="@drawable/coeur" />
+
+        <!-- Score actuel -->
+        <TextView
+            android:id="@+id/texte_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/bleu"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Bouton pour arrêter la partie -->
+        <Button
+            android:id="@+id/bouton_quitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E53935"
+            android:text="@string/quitter" />
+
+    </LinearLayout>
+
+    <!-- Calcul à résoudre -->
     <TextView
         android:id="@+id/texte_question"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
         android:textColor="@color/bleu"
-        android:textSize="32sp"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
-    <!-- Champ de saisie de la réponse -->
-    <EditText
-        android:id="@+id/champ_reponse"
-        android:layout_width="200dp"
+    <!-- Affichage de la réponse saisie (aucun clavier système) -->
+    <TextView
+        android:id="@+id/texte_reponse"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/fond_reponse"
         android:gravity="center"
-        android:hint="@string/votre_reponse"
-        android:inputType="numberSigned" />
+        android:minHeight="52dp"
+        android:padding="8dp"
+        android:textColor="@color/bleu"
+        android:textSize="30sp" />
 
-    <!-- Bouton pour valider la réponse -->
-    <Button
-        android:id="@+id/bouton_valider"
-        android:layout_width="200dp"
+    <!-- Clavier numérique personnalisé (chiffres 0 à 9) -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:backgroundTint="@color/bleu"
-        android:text="@string/valider" />
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        tools:ignore="HardcodedText">
+
+        <!-- Ligne 1 2 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn1"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="1"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn2"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="2"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn3"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="3"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <!-- Ligne 4 5 6 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn4"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="4"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn5"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="5"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn6"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="6"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <!-- Ligne 7 8 9 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn7"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="7"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn8"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="8"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn9"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="9"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <!-- Ligne effacer / 0 / valider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_effacer"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#9E9E9E"
+                android:text="@string/effacer"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn0"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bleu"
+                android:text="0"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#43A047"
+                android:text="@string/ok"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -13,6 +13,12 @@
     <string name="partie_terminee">Partie terminée</string>
     <string name="score_final">Votre score final : %1$d</string>
     <string name="votre_nom">Votre nom</string>
+    <string name="quitter">Quitter</string>
+    <string name="ok">OK</string>
+    <string name="effacer">⌫</string>
+    <string name="score_actuel">Score : %1$d</string>
+    <string name="score_nul">Score nul : non enregistré</string>
+    <string name="vies">Vies</string>
     <!-- Écran des meilleurs scores -->
     <string name="titre_scores">Meilleurs scores</string>
     <string name="retour">Retour</string>

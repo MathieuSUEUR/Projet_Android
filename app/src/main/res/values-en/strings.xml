@@ -13,6 +13,12 @@
     <string name="partie_terminee">Game over</string>
     <string name="score_final">Your final score: %1$d</string>
     <string name="votre_nom">Your name</string>
+    <string name="quitter">Quit</string>
+    <string name="ok">OK</string>
+    <string name="effacer">⌫</string>
+    <string name="score_actuel">Score: %1$d</string>
+    <string name="score_nul">Zero score: not saved</string>
+    <string name="vies">Lives</string>
     <!-- High scores screen -->
     <string name="titre_scores">High scores</string>
     <string name="retour">Back</string>
