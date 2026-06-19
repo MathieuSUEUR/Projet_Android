@@ -111,19 +111,19 @@ public class JeuActivity extends AppCompatActivity {
                 signe = "-";
                 pointsQuestion = 1;
                 break;
-            case 2: // multiplication (rapporte 5 points)
+            case 2: // multiplication (rapporte 2 points)
                 a = random.nextInt(10) + 1;
                 b = random.nextInt(10) + 1;
                 bonneReponse = a * b;
                 signe = "×";
-                pointsQuestion = 5;
+                pointsQuestion = 2;
                 break;
-            default: // division entière : a % b == 0 (rapporte 5 points)
+            default: // division entière : a % b == 0 (rapporte 2 points)
                 b = random.nextInt(9) + 1;            // diviseur entre 1 et 9
                 bonneReponse = random.nextInt(9) + 1; // quotient entre 1 et 9
                 a = b * bonneReponse;                 // ainsi a / b est entier
                 signe = "÷";
-                pointsQuestion = 5;
+                pointsQuestion = 2;
                 break;
         }
 
