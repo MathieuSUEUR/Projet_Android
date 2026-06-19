@@ -3,6 +3,16 @@
     <string name="titre_app">QuizMaths</string>
     <string name="jouer">Jouer</string>
     <string name="meilleurs_scores">Meilleurs scores</string>
+    <!-- Écran de jeu -->
+    <string name="valider">Valider</string>
+    <string name="votre_reponse">Votre réponse</string>
+    <string name="score_vies">Score : %1$d   Vies : %2$d</string>
+    <string name="bonne_reponse">Bonne réponse !</string>
+    <string name="mauvaise_reponse">Mauvaise réponse</string>
+    <string name="entrez_reponse">Entrez une réponse</string>
+    <string name="partie_terminee">Partie terminée</string>
+    <string name="score_final">Votre score final : %1$d</string>
+    <string name="votre_nom">Votre nom</string>
     <!-- Écran des meilleurs scores -->
     <string name="titre_scores">Meilleurs scores</string>
     <string name="retour">Retour</string>

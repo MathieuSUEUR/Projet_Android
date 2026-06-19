@@ -19,6 +19,11 @@
             </intent-filter>
         </activity>
 
+        <!-- Écran de jeu -->
+        <activity
+            android:name=".JeuActivity"
+            android:exported="true" />
+
         <!-- Écran des meilleurs scores -->
         <activity
             android:name=".HighscoreActivity"

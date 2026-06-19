@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <!-- Affichage du score et des vies -->
+    <TextView
+        android:id="@+id/texte_infos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textColor="@color/bleu"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Question (le calcul à résoudre) -->
+    <TextView
+        android:id="@+id/texte_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textColor="@color/bleu"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <!-- Champ de saisie de la réponse -->
+    <EditText
+        android:id="@+id/champ_reponse"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:hint="@string/votre_reponse"
+        android:inputType="numberSigned" />
+
+    <!-- Bouton pour valider la réponse -->
+    <Button
+        android:id="@+id/bouton_valider"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/bleu"
+        android:text="@string/valider" />
+
+</LinearLayout>
